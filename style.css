@@ -1,0 +1,168 @@
+:root {
+  --purple: hsl(259, 100%, 65%);
+  --error: hsl(0, 100%, 67%);
+  --white: hsl(0, 0%, 100%);
+  --offwhite: hsl(0, 0%, 94%);
+  --lightgrey: hsl(0, 0%, 86%);
+  --smokeygrey: hsl(0, 1%, 44%);
+  --offblack: hsl(0, 0%, 8%);
+  font-size: 62.5%;
+}
+/* utilities classes */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  font-weight: 700;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: var(--offwhite);
+}
+
+.errorSelector {
+  color: var(--error);
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.error-label {
+  color: var(--error);
+  font-weight: 400;
+}
+
+.error-input {
+  border: 1px solid var(--error);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Main content */
+
+.app__container {
+  background-color: var(--white);
+  width: 700px;
+  height: 550px;
+  border-radius: 2rem 2rem 15rem 2rem;
+  padding: 4rem;
+}
+
+.app__top {
+  display: flex;
+  width: 450px;
+  justify-content: space-between;
+  color: var(--smokeygrey);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 12px;
+  letter-spacing: 0.3rem;
+}
+
+input {
+  width: 140px;
+  font-size: 3.2rem;
+  padding: 1rem 1rem 1rem 1.2rem;
+  border-radius: 0.8rem;
+  outline: none;
+  border: 1px solid var(--lightgrey);
+  font-weight: 700;
+}
+
+input:focus {
+  border: 1px solid var(--purple);
+  outline: none;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  width: 100%;
+  border-bottom: 1px solid var(--lightgrey);
+}
+
+.btn {
+  padding: 2rem;
+  border-radius: 50%;
+  background-color: var(--purple);
+  border: none;
+  background-position: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--offblack);
+}
+
+p {
+  font-size: 80px;
+  font-style: italic;
+  font-weight: 800;
+  margin: 0 0 -2rem 0;
+  color: var(--offblack);
+}
+
+span {
+  color: var(--purple);
+}
+
+@media (max-width: 600px) {
+  .app__container {
+    width: 350px;
+    height: 430px;
+    padding: 3rem;
+    border-radius: 0 0 10rem 0;
+    margin: auto;
+  }
+
+  .app__top {
+    width: 100%;
+  }
+
+  input {
+    width: 90px;
+    font-size: 2rem;
+    padding: 1.5rem;
+  }
+
+  .errorSelector {
+    width: 90px;
+  }
+
+  .btn-content {
+    margin: 2rem 0 0 0;
+  }
+
+  .btn svg {
+    width: 25px;
+    height: 25px;
+    font-weight: bold;
+  }
+  .second-line {
+    width: 100%;
+    border: 1px solid var(--lightgrey);
+  }
+
+  p {
+    font-size: 50px;
+  }
+}
