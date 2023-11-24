@@ -24,110 +24,76 @@ const appCalculatorAge = {
   ],
 
   calculateDate() {
-    let dayStorage = 0;
-    let monthStorage = 0;
-    let yearStorage = Math.abs(this.currentYear - this.yearInput.value);
+    let yearDifference = this.currentYear - this.yearInput.value;
+    let monthDifference = this.currentMonth - this.monthInput.value;
+    let dayDifference = this.currentDay - this.dayInput.value;
 
-    if (this.currentMonth >= this.monthInput.value) {
-      monthStorage = this.currentMonth - this.monthInput.value;
-    } else {
-      yearStorage--;
-      monthStorage = 12 + this.currentMonth - this.monthInput.value;
+    if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+      yearDifference--;
+      monthDifference += 12;
     }
 
-    if (this.currentDay >= this.dayInput.value) {
-      dayStorage = this.currentDay - this.dayInput.value;
-    } else {
-      monthStorage--;
-      if ((this.dayInput.value, this.monthInput.value, this.yearInput.value)) {
-        dayStorage = 30 + this.currentDay - this.dayInput.value;
-      }
-      if (monthStorage < 0) {
-        monthStorage = 11;
-        yearStorage--;
-      }
+    if (dayDifference < 0) {
+      const daysInLastMonth = 30;
+      dayDifference += daysInLastMonth;
+      monthDifference--;
     }
 
-    this.dayResult.innerHTML = dayStorage;
-    this.monthResult.innerHTML = monthStorage;
-    this.yearResult.innerHTML = yearStorage;
+    this.dayResult.innerHTML = dayDifference;
+    this.monthResult.innerHTML = monthDifference;
+    this.yearResult.innerHTML = yearDifference;
   },
 
   isDayCorrect() {
-    if (this.dayInput.value === "") {
+    const dayValue = this.dayInput.value;
+    if (dayValue === "" || dayValue <= 0 || dayValue > 31) {
       this.errorState(
         this.dayInput,
         this.errorSelectors[0],
-        this.typeOfError[0],
+        dayValue === "" ? this.typeOfError[0] : this.typeOfError[1],
         this.dayLabel
       );
       return false;
-    } else if (this.dayInput.value <= 0 || this.dayInput.value > 31) {
-      this.errorState(
-        this.dayInput,
-        this.errorSelectors[0],
-        this.typeOfError[1],
-        this.dayLabel
-      );
-      return false;
-    } else {
-      this.clearError(this.dayInput, this.errorSelectors[0], this.dayLabel);
-      return true;
     }
+
+    this.clearError(this.dayInput, this.errorSelectors[0], this.dayLabel);
+    return true;
   },
 
   isMonthCorrect() {
-    if (this.monthInput.value === "") {
+    const monthValue = this.monthInput.value;
+    if (monthValue === "" || monthValue <= 0 || monthValue > 12) {
       this.errorState(
         this.monthInput,
         this.errorSelectors[1],
-        this.typeOfError[0],
+        monthValue === "" ? this.typeOfError[0] : this.typeOfError[2],
         this.monthLabel
       );
       return false;
-    } else if (this.monthInput.value <= 0 || this.monthInput.value > 12) {
-      this.errorState(
-        this.monthInput,
-        this.errorSelectors[1],
-        this.typeOfError[2],
-        this.monthLabel
-      );
-      return false;
-    } else {
-      this.clearError(this.monthInput, this.errorSelectors[1], this.monthLabel);
-      return true;
     }
+
+    this.clearError(this.monthInput, this.errorSelectors[1], this.monthLabel);
+    return true;
   },
 
   isYearCorrect() {
-    if (this.yearInput.value === "") {
+    const yearValue = this.yearInput.value;
+    if (
+      yearValue === "" ||
+      yearValue > this.currentYear ||
+      yearValue == this.currentYear
+    ) {
       this.errorState(
         this.yearInput,
         this.errorSelectors[2],
-        this.typeOfError[0],
+        yearValue === "" ? this.typeOfError[0] : this.typeOfError[3],
         this.yearLabel
       );
       return false;
-    } else if (this.yearInput.value > this.currentYear) {
-      this.errorState(
-        this.yearInput,
-        this.errorSelectors[2],
-        this.typeOfError[3],
-        this.yearLabel
-      );
-      return false;
-    } else if (this.yearInput.value == this.currentYear) {
-      this.errorState(
-        this.yearInput,
-        this.errorSelectors[2],
-        this.typeOfError[3],
-        this.yearLabel
-      );
-      return false;
-    } else {
-      this.clearError(this.yearInput, this.errorSelectors[2], this.yearLabel);
-      return true;
     }
+
+    this.clearError(this.yearInput, this.errorSelectors[2], this.yearLabel);
+    return true;
   },
 
   errorState(input, errorSelector, errorMessage, label) {
